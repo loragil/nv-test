@@ -1,3 +1,21 @@
-<p>
-  location works!
-</p>
+<div class="location container" *ngIf="model; else noLocation">
+    <div>Your last location</div>
+
+    <div class="row">
+        <div class="lat">
+            latitude
+            <input type="number" [(ngModel)]="model.latitude">
+        </div>
+
+        <div class="lon">
+            longitude
+            <input type="number" value="{{model?.longitude}}">
+        </div>
+
+        <!-- <div class="clear"> -->
+            <button class="clear btn">Clear</button>
+        <!-- </div> -->
+    </div>
+</div>
+
+<ng-template #noLocation >your location is still unknown</ng-template>

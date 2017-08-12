@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'location',
-  templateUrl: './location.component.html',
-  styleUrls: ['./location.component.css']
+    selector: 'location',
+    templateUrl: './location.component.html',
+    styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit {
+    @Input() model:Coordinates;
 
-  constructor() { }
+    private latitude:number;
+    // @Input() set model(location:Coordinates){
+    //     debugger;
+    // }
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }
