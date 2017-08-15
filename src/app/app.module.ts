@@ -5,8 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //vendor imports:
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-//import {} from '@ng-bootstrap/ng-bootstrap';
-
+//import 'bootstrap';
 // app imports:
 import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home/home.module';
@@ -35,7 +34,8 @@ const appRoutes: Routes = [
         BrowserModule,
         HomeModule,
         LocationModule,
-        SharedModule
+        SharedModule//,
+        //sCollapseModule
     ],
     providers: [],
     bootstrap: [AppComponent]
