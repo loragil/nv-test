@@ -22,8 +22,9 @@ export class HomeContainerComponent implements OnInit {
     }
 
     private getLocationModel(){
-        return this.locationService.getLocation()
-        .then(location => this.location = location)
-        .catch(error => console.log(error));
+        // return this.locationService.getLocation()
+        // .then(location => this.location = location)
+        // .catch(error => console.log(error));
+        return this.location = this.locationService.getLocation();
     }
 }

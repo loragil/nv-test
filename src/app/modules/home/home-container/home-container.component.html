@@ -1,3 +1,6 @@
 <div class="home container">
-    <location [model]="location"></location>
+    <location [model]="location"
+    *ngIf="model; else noLocation"></location>
 </div>
+
+<ng-template #noLocation >your location is still unknown</ng-template>

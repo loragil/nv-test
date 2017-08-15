@@ -12,6 +12,7 @@ AGENDA:
 * add toatster component
 * fix navbar
 * make navbar responsive
+* fix refresh (f5) route - always go to default
 
 
 TODO:

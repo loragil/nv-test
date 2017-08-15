@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
 import {LocationService} from '../../shared/services/location.service';
-//import {LocationService} from '../../shared/services/location.service';
+import {AppLocation} from '../../../app.model';
 
 export const MARKER_ICON = L.icon({
     iconUrl: '/assets/marker-icon.png',
@@ -18,20 +18,21 @@ export const MARKER_ICON = L.icon({
 export class LocationContainerComponent implements OnInit {
     private map:L.Map;
     private marker:L.Marker;
+    private location:AppLocation;
 
     constructor(private locationService:LocationService) { }
 
     ngOnInit() {
-        let location = this.locationService.getLocation();
+        this.location = this.locationService.getLocation();
 
-        if(location){
-            this.initMap(location);
+        if(this.location){
+            this.initMap(this.location);
         } else {
             //FIXME: ? handle violation 'Only request geolocation information in response to a user gesture.'
             if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition((position) => {
-                    location = {lat:position.coords.latitude, lng:position.coords.longitude};
-                    this.initMap(location);
+                    this.location = {lat:position.coords.latitude, lng:position.coords.longitude};
+                    this.initMap(this.location);
                 });
             } else{
                 //FIXME: toaster notificaion
@@ -116,7 +117,7 @@ export class LocationContainerComponent implements OnInit {
 
     private onMapClick(e) {
         this.marker.setLatLng(e.latlng);
-        //this.locationService.setLocation(this.marker.getLatLng());
+        this.locationService.setLocation(this.marker.getLatLng());
         //NOTE: not panning map to center around new location, because it's seems eye-disturbing
     }
 
@@ -125,5 +126,10 @@ export class LocationContainerComponent implements OnInit {
 
         this.map.panTo(new L.LatLng(lat, lng));
         //this.locationService.setLocation({lat, lng});
+    }
+
+    onLocationChange(newLocation){
+        this.marker.setLatLng(newLocation);
+        this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
     }
 }
