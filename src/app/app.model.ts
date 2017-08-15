@@ -1,4 +1,4 @@
-export interface Coordinates{
-    latitude: number;
-    longitude: number
+export interface AppLocation{
+    lat: number;
+    lng: number
 }

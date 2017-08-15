@@ -12,8 +12,6 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home/home.module';
 import { LocationModule } from './modules/location/location.module';
 import { SharedModule } from './modules/shared/shared.module';
-//import {Coordinates} from './modules/shared/types';
-//import { LocationComponent } from './modules/shared/components/location/location.component';
 import { NavbarComponent } from './modules/shared/components/navbar/navbar.component';
 import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
 import { LocationContainerComponent } from './modules/location/location-container/location-container.component';
@@ -27,8 +25,6 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent
-        //HomeContainerComponent,
-        //LocationContainerComponent
     ],
     imports: [
         RouterModule.forRoot(

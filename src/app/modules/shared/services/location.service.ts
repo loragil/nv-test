@@ -5,8 +5,9 @@ export class LocationService {
 
     constructor() { }
 
-    getLocation(){
-        return Promise.resolve(JSON.parse(localStorage.getItem('location')));
+    getLocation()/*:Promise<Location>*/{
+        return JSON.parse(localStorage.getItem('location'));
+        //FIXME: return Promise.resolve(JSON.parse(localStorage.getItem('location')));
     }
 
     setLocation(location){

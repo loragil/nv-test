@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LocationService} from '../../shared/services/location.service';
-import {Coordinates} from '../../../app.model';
+import {AppLocation} from '../../../app.model';
 
 @Component({
     selector: 'home-container',
@@ -8,7 +8,8 @@ import {Coordinates} from '../../../app.model';
     styleUrls: ['./home-container.component.css']
 })
 export class HomeContainerComponent implements OnInit {
-    private location:Promise<Coordinates>;
+    private location:AppLocation;
+    //private location:Promise<Location>;
 
     constructor(private locationService:LocationService) { }
 
@@ -23,6 +24,6 @@ export class HomeContainerComponent implements OnInit {
     private getLocationModel(){
         return this.locationService.getLocation()
         .then(location => this.location = location)
-        .catch(error => console.log(error));        
+        .catch(error => console.log(error));
     }
 }
