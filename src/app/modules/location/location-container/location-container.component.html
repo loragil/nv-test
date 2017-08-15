@@ -1,5 +1,10 @@
-<div class="location container">
+<div class="location sssscontaisssner">
     <div id="mapid"></div>
+    <!-- <div id="mapid" *ngIf="!location.lat && !location.lng"></div> -->
+
     <location [model]="location"
-    (onLocationChange)="onLocationChange($event)"></location>
+    (onLocationChange)="onLocationChange($event)"
+    (onLoadLocation)="onLoadLocation($event)"
+    (onSaveLocation)="onSaveLocation($event)"
+    (onClearLocation)="onClearLocation($event)"></location>
 </div>

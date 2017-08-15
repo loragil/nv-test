@@ -37,6 +37,8 @@ export class LocationContainerComponent implements OnInit {
             } else{
                 //FIXME: toaster notificaion
                 //this.map.panTo(new L.LatLng(-1, -1));
+                console.log('bla');
+                this.initMap({lat:-23.55052, lng:-46.633309});
             }
         }
     }
@@ -44,8 +46,8 @@ export class LocationContainerComponent implements OnInit {
     private initMap({lat, lng}){
         let {tileRow, tileColumn} = this.getTileXYByCoordinates(lat, lng);
 
-        this.locationService.setLocation({lat, lng});
-        console.log(lat,lng);
+        //this.locationService.setLocation({lat, lng});
+        //console.log(lat,lng);
 
         this.map = L.map('mapid').setView([lat, lng], 13);
         this.marker = L.marker([lat, lng], {icon: MARKER_ICON, draggable:true}).addTo(this.map);
@@ -54,25 +56,27 @@ export class LocationContainerComponent implements OnInit {
 
         //let url =  `https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/${tileColumn}/${tileRow}/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g`;
         //let url =  'https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/'+tileColumn+'/'+tileRow+'/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g';
-        let url =  'https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/4400/2686/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g';
+        //let url =  'https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/4400/2686/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g';
 
         //L.tileLayer('https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/4400/2686/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g', {
         //L.tileLayer('http://{s}.base.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={uuRdKZwb0MXCxDUmf4vb}&app_code={duyMZ5irUq3nZ3lf8erQ1g}&lg={language}', {
-
-        L.tileLayer(url, {
+        var HERE_normalDay = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/normal.day/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
             attribution: 'Never lose sight of where you\'re going!',
             subdomains: '1234',
-            base: 'base',
-            type: 'maptile',
-            scheme: 'normal.day',
+            mapID: 'newest',
             app_id: 'uuRdKZwb0MXCxDUmf4vb',
             app_code: 'duyMZ5irUq3nZ3lf8erQ1g',
-            mapID: 'newest',
+            base: 'base',
             maxZoom: 20,
+            type: 'maptile',
             language: 'eng',
             format: 'png8',
-            size: '256'
-        }).addTo(this.map);
+            size: '256',
+            z:13//,
+            //x:tileColumn,
+            //y:tileRow
+        });
+        HERE_normalDay.addTo(this.map);
 
         // L.tileLayer.provider('HERE.terrainDay', {
         //     app_id: 'uuRdKZwb0MXCxDUmf4vb',
@@ -82,21 +86,9 @@ export class LocationContainerComponent implements OnInit {
         //bind map & marker events
         this.map.on('click', (e) => this.onMapClick(e));
         this.marker.on('dragend', (e) => this.onMarkerDragged(e));
-
-        //this.map = L.map('mapid').locate({setView: true, maxZoom: 16});
-
-        // tileColumn = 4400;
-        // tileRow = 2686;
-        // let urla =  `https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/${tileColumn}/${tileRow}/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g`;
-        // let urlc =  `https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/${tileRow}/${tileColumn}/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g`;
-        // let urlb =  'https://1.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/13/4400/2686/256/png8?app_id=uuRdKZwb0MXCxDUmf4vb&app_code=duyMZ5irUq3nZ3lf8erQ1g';
-        //let tileLayer  = L.tileLayer(urlb).addTo(this.map);
-
-
-        //tileLayer.addTo(this.map);
     }
 
-    //TODO: extract to utils?
+    //TODO: extract to utils? maybe this Fn is NOT necessary
     private getTileXYByCoordinates(lat, lng){
         //var lat = 52.525439, // Latitude
         //lon = 13.38727,    // Longitude
@@ -117,7 +109,8 @@ export class LocationContainerComponent implements OnInit {
 
     private onMapClick(e) {
         this.marker.setLatLng(e.latlng);
-        this.locationService.setLocation(this.marker.getLatLng());
+        this.location = e.latlng;
+        //this.locationService.setLocation(this.marker.getLatLng());
         //NOTE: not panning map to center around new location, because it's seems eye-disturbing
     }
 
@@ -125,11 +118,28 @@ export class LocationContainerComponent implements OnInit {
         let {lat, lng} = this.marker.getLatLng();
 
         this.map.panTo(new L.LatLng(lat, lng));
+        this.location = {lat, lng};
         //this.locationService.setLocation({lat, lng});
     }
 
     onLocationChange(newLocation){
+        //this.marker.setLatLng(newLocation);
+        //this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
+
+        this.location = newLocation;
+    }
+
+    onLoadLocation(newLocation){
         this.marker.setLatLng(newLocation);
         this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
+    }
+
+    onSaveLocation(newLocation){
+        let {lat, lng} = newLocation;
+        this.locationService.setLocation({lat, lng});
+    }
+
+    onClearLocation(){
+        this.locationService.clearLocation();
     }
 }

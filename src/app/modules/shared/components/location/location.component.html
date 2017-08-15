@@ -5,8 +5,11 @@
             <fieldset>
                 <div class="lat">
                     latitude
-                    <input type="text" min="-90" max="90"
+                    <!-- <input type="text" min="-90" max="90"
                     value="{{lat}}" pattern="{{VALID_LAT_LON}}"
+                    (change)="handleLocationChange($event, 'lat')"> -->
+                    <input type="text" name="lat" min="-90" max="90"
+                    [(ngModel)]="lat" pattern="{{VALID_LAT_LON}}"
                     (change)="handleLocationChange($event, 'lat')">
                 </div>
 
@@ -18,7 +21,10 @@
                 </div>
 
                 <div class="actions">
-                    <button class="clear btn">Clear</button>
+                    <button class="clear btn" (click)="handleClearLocation()"
+                    [disabled]="!lat && !lng">Clear</button>
+                    <button class="load btn" (click)="handleLoadLocation()">Load</button>
+                    <button class="save btn" (click)="handleSaveLocation()">Save</button>
                 </div>
 
             </fieldset>
