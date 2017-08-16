@@ -4,6 +4,7 @@ import { LocationComponent } from './components/location/location.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ClearLocationModalComponent } from './components/modal/clear-location-modal/clear-location-modal.component';
 
 @NgModule({
     imports: [
@@ -11,7 +12,7 @@ import { RouterModule } from '@angular/router';
         FormsModule ,
         RouterModule
     ],
-    declarations: [LocationComponent, NavbarComponent],
-    exports: [LocationComponent, NavbarComponent]
+    declarations: [LocationComponent, NavbarComponent, ClearLocationModalComponent],
+    exports: [LocationComponent, NavbarComponent, ClearLocationModalComponent]
 })
 export class SharedModule { }

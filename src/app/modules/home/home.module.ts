@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { HomeContainerComponent } from './home-container/home-container.component';
 import {LocationService} from '../shared/services/location.service';
+import {ClearLocationModalComponent} from '../shared/components/modal/clear-location-modal/clear-location-modal.component';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import {LocationService} from '../shared/services/location.service';
         SharedModule
     ],
     providers:[LocationService],
-    declarations: [ HomeContainerComponent]
+    declarations: [ HomeContainerComponent],
+    entryComponents:[ClearLocationModalComponent]
 })
 export class HomeModule { }

@@ -13,6 +13,7 @@ AGENDA:
 * fix navbar
 * make navbar responsive
 * fix refresh (f5) route - always go to default
+* complete home screen - add location component & logic
 
 
 TODO:

@@ -1,10 +1,12 @@
-<div class="home container">
+<div class="home-container d-flex align-content-center justify-content-center">
     <location [model]="location"
     *ngIf="model; else noLocation"></location>
 </div>
 
 <ng-template #noLocation >
-    <div class="col align-self-center">
+    <div class="row align-self-center">
         your location is still unknown
+
+        <button class="btn btn-lg btn-outline-primary" (click)="openClearLocationModal()">Launch demo modal</button>
     </div>
 </ng-template>

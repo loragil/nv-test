@@ -37,7 +37,6 @@ export class NavbarComponent implements OnInit {
 
                 this.titleService.setTitle(title);
                 this.title = title;
-debugger;
                 this.showMenu = event['showMenu'];
             });
         }
