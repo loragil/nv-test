@@ -1,5 +1,5 @@
-.navbar-brand:not([href]):not([tabindex]){
-    color: #fff;
+.navbar-brand{
+    padding-top:0;
 }
 
 .active {

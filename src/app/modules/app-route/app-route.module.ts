@@ -4,11 +4,9 @@ import { HomeContainerComponent } from '../home/home-container/home-container.co
 import { LocationContainerComponent } from '../location/location-container/location-container.component';
 
 const routes: Routes = [
-    { path: 'location', component: LocationContainerComponent },
-    { path: '', component: HomeContainerComponent, data:{ title:'Home'} },
-    //{ path: 'home', component: HomeContainerComponent, data:{ title:'Home'} },
+    { path: 'location', component: LocationContainerComponent, data:{ title:'Location', showMenu: false} },
+    { path: '', component: HomeContainerComponent, data:{ title:'Here You Are!', showMenu: true} },
     { path: '**', redirectTo: '/', pathMatch: 'full' }
-    //{ path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

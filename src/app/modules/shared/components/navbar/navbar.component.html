@@ -1,18 +1,25 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse bg-faded navbar-fixed-top">
-    <button class="navbar-toggler navbar-toggler-right" type="button"
-    data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" (click)="isActive = !isActive">
-    <span class="navbar-toggler-icon"></span>
-</button>
+<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse bg-faded navbar-fixed-top">
 
-<a class="navbar-brand" routerLink="/">{{title}}</a>
-<!-- <a class="navbar-brand">{{title}}</a> -->
-<button (click)="goBack()">Back</button>
-<div class="collapse navbar-collapse" [ngClass] = "{show : isActive}">
-    <ul class="navbar-nav">
-        <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="location">My Location</a>
-        </li>
-        <!-- <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/location">Location</a></li> -->
-    </ul>
-</div>
+    <div *ngIf="!showMenu">
+        <button (click)="goBack()" type="button" class="btn border-0" title="Back">
+            <span class="fa fa-chevron-left align-middle"></span>
+        </button>
+    </div>
+
+    <button class="navbar-toggler navbar-toggler-right" type="button"  *ngIf="showMenu"
+        data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" (click)="isActive = !isActive">
+        <i class="fa fa-bars" aria-hidden="true" *ngIf="!isActive"></i>
+        <i class="fa fa-times" aria-hidden="true" *ngIf="isActive"></i>
+    </button>
+
+    <div class="navbar-brand" *ngIf="showMenu">{{title}}</div>
+
+    <div class="collapse navbar-collapse" *ngIf="showMenu" [ngClass] = "{show : isActive}">
+        <ul class="navbar-nav">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="location">My Location</a>
+            </li>
+        </ul>
+    </div>
+
 </nav>

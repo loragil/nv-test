@@ -14,6 +14,7 @@ import 'rxjs/add/operator/filter';
 })
 export class NavbarComponent implements OnInit {
     private title;
+    private showMenu:boolean = true;
     private subscription:Subscription;
 
     constructor(private router: Router,
@@ -36,6 +37,8 @@ export class NavbarComponent implements OnInit {
 
                 this.titleService.setTitle(title);
                 this.title = title;
+debugger;
+                this.showMenu = event['showMenu'];
             });
         }
 

@@ -3,4 +3,8 @@
     *ngIf="model; else noLocation"></location>
 </div>
 
-<ng-template #noLocation >your location is still unknown</ng-template>
+<ng-template #noLocation >
+    <div class="col align-self-center">
+        your location is still unknown
+    </div>
+</ng-template>
