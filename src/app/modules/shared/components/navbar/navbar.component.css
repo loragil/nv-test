@@ -1,9 +1,13 @@
+.navbar-brand:not([href]):not([tabindex]){
+    color: #fff;
+}
+
 .active {
-  color: #fff;
+    color: #fff;
 }
 
 .navbar-toggler {
-  border: solid 1px silver;
-  border-radius: 2px;
-  color: #eee;
+    border: solid 1px silver;
+    border-radius: 2px;
+    color: #eee;
 }
