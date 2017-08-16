@@ -30,10 +30,22 @@ export class HomeContainerComponent implements OnInit {
                 //modal action executed
                 if(clearLocation){
                     this.locationService.clearLocation();
+                    this.location = null;
                 }
             }, (reason) => {
-                //modal dismissed                
+                //modal dismissed
             });
+        }
+
+        onLocationChange(newLocation){
+            //this.marker.setLatLng(newLocation);
+            //this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
+
+            this.location = newLocation;
+        }
+
+        onClearLocation(){
+            this.locationService.clearLocation();
         }
 
         private initModels(){

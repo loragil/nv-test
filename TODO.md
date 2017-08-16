@@ -14,6 +14,14 @@ AGENDA:
 * make navbar responsive
 * fix refresh (f5) route - always go to default
 * complete home screen - add location component & logic
+* split which buttons would show on location component for each screen
+
+/**/
+- ? location service
+- add user notification (toaster) to all success/fail events
+- make a generic modal-shell component
+- utilize observables /store ?
+/**/
 
 
 TODO:
