@@ -1,9 +1,11 @@
 // angular imports:
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //vendor imports:
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ToasterModule} from 'angular2-toaster';
 
 // app imports:
 import { AppComponent } from './app.component';
@@ -23,6 +25,8 @@ import { LocationContainerComponent } from './modules/location/location-containe
     imports: [
         NgbModule.forRoot(),
         BrowserModule,
+        BrowserAnimationsModule,
+        ToasterModule,
         HomeModule,
         LocationModule,
         SharedModule,

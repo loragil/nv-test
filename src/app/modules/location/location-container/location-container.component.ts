@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef  } from '@angular/core';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
 import {LocationService} from '../../shared/services/location.service';
 import {AppLocation} from '../../../app.model';
 import { Router } from '@angular/router';
+//import { ToastsManager } from 'ng2-toastr/ng2-toastr';ToasterService
+import { ToasterService, Toast } from 'angular2-toaster';
 
 export const MARKER_ICON = L.icon({
     iconUrl: '/assets/marker-icon.png',
@@ -26,9 +28,11 @@ export class LocationContainerComponent implements OnInit {
     private map:L.Map;
     private marker:L.Marker;
     private location:AppLocation;
+    //private toasterService: ToasterService;
 
     constructor(private locationService:LocationService,
-        private router:Router) { }
+        private router:Router,
+        private toasterService: ToasterService) {}
 
         ngOnInit() {
             this.location = this.locationService.getLocation();
@@ -54,10 +58,26 @@ export class LocationContainerComponent implements OnInit {
             }
         }
 
+        // private toast(toast:Toast){
+        //     this.toasterService.pop(toast);
+        // }
+
         private setDefaultLocation(){
             //current location is not avialable or not supported. set default location
-            //FIXME: toaster notificaion
-            console.log('setting default location');
+
+            //notify user
+            // this.toast({
+            //     type: 'error',
+            //     title: 'close button',
+            //     body: 'No location have been saved yet',
+            //     showCloseButton: true
+            // });
+            this.toasterService.pop({
+                type: 'error',
+                body: 'No location have been saved yet'
+            });
+
+            //console.log('setting default location');
             this.location = {lat:DEFAULT_LOCATION.lat, lng:DEFAULT_LOCATION.lng};
             this.initMap(this.location);
         }
@@ -130,6 +150,7 @@ export class LocationContainerComponent implements OnInit {
             this.marker.setLatLng(e.latlng);
             this.location = e.latlng;
             //this.locationService.setLocation(this.marker.getLatLng());
+            //this.toasterService.pop('success', 'Args Title', 'Args Body');
             //NOTE: not panning map to center around new location, because it's seems eye-disturbing
         }
 
@@ -149,25 +170,32 @@ export class LocationContainerComponent implements OnInit {
         }
 
         onLoadLocation(){
-            let currentLocation = this.locationService.getLocation();
-            if(!currentLocation){
-                debugger;
+            let cachedLocation = this.locationService.getLocation();
+            if(!cachedLocation){
                 //this.location = this.locationService.getLocation() || DEFAULT_LOCATION;
-                //TODO:: notify user
+                //notify user
+                this.toasterService.pop({
+                    type: 'error',
+                    title: 'Location not set',
+                    body: 'No location was saved yet'
+                });
             } else {
-                this.marker.setLatLng(this.location);
-                this.map.panTo(new L.LatLng(this.location.lat, this.location.lng));
+                this.marker.setLatLng(cachedLocation);
+                this.map.panTo(new L.LatLng(cachedLocation.lat, cachedLocation.lng));
+                this.location = cachedLocation;
                 // this.marker.setLatLng(newLocation);
                 // this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
             }
         }
 
         onSaveLocation(){
+            //notify user
+            this.toasterService.pop({
+                type: 'success',
+                body: 'Location saved'
+            });
             this.locationService.setLocation(this.location);
             this.router.navigate(['/']);
         }
 
-        onClearLocation(){
-            this.locationService.clearLocation();
-        }
     }

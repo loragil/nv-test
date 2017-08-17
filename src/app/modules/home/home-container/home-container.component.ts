@@ -3,6 +3,7 @@ import {LocationService} from '../../shared/services/location.service';
 import {AppLocation} from '../../../app.model';
 import {ClearLocationModalComponent} from '../../shared/components/modal/clear-location-modal/clear-location-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ToasterService, Toast } from 'angular2-toaster';
 
 @Component({
     selector: 'home-container',
@@ -14,7 +15,8 @@ export class HomeContainerComponent implements OnInit {
     //private location:Promise<Location>;
 
     constructor(private locationService:LocationService,
-        private modalService: NgbModal) { }
+        private modalService: NgbModal,
+        private toasterService: ToasterService) { }
 
         ngOnInit() {
             this.initModels();
@@ -29,6 +31,12 @@ export class HomeContainerComponent implements OnInit {
             modalRef.result.then((clearLocation:boolean) => {
                 //modal action executed
                 if(clearLocation){
+                    //notify user
+                    this.toasterService.pop({
+                        type: 'success',
+                        body: 'Location cleared'
+                    });
+
                     this.locationService.clearLocation();
                     this.location = null;
                 }
@@ -43,10 +51,14 @@ export class HomeContainerComponent implements OnInit {
 
             this.location = newLocation;
         }
-
-        onClearLocation(){
-            this.locationService.clearLocation();
-        }
+        
+        // onClearLocation(){
+        //     this.toasterService.pop({
+        //         type: 'success',
+        //         body: 'Location cleared'
+        //     });
+        //     this.locationService.clearLocation();
+        // }
 
         private initModels(){
             this.getLocationModel();

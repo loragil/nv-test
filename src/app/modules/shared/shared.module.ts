@@ -5,12 +5,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClearLocationModalComponent } from './components/modal/clear-location-modal/clear-location-modal.component';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule ,
-        RouterModule
+        RouterModule,
+        ToastModule.forRoot()
     ],
     declarations: [LocationComponent, NavbarComponent, ClearLocationModalComponent],
     exports: [LocationComponent, NavbarComponent, ClearLocationModalComponent]
