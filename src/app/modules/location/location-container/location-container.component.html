@@ -7,8 +7,9 @@
     (onLoadLocation)="onLoadLocation($event)"
     (onSaveLocation)="onSaveLocation($event)">
 
-        <button class="load btn btn-outline-secondary" (click)="handleLoadLocation()">Load</button>
-        <button class="save btn btn-outline-secondary" (click)="handleSaveLocation()">Save</button>
+        <button class="load btn btn-outline-secondary" (click)="onLoadLocation($event)">Load</button>
+<!-- <button class="save btn btn-outline-secondary" (click)="this.handleSaveLocation()">Save</button> -->
+        <button class="save btn btn-outline-secondary" (click)="onSaveLocation($event)">Save</button>
 
     </location>
 </div>

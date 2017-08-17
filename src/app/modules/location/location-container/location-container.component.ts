@@ -149,16 +149,21 @@ export class LocationContainerComponent implements OnInit {
         }
 
         onLoadLocation(){
-            this.location = this.locationService.getLocation() || DEFAULT_LOCATION;
-            this.marker.setLatLng(this.location);
-            this.map.panTo(new L.LatLng(this.location.lat, this.location.lng));
-            // this.marker.setLatLng(newLocation);
-            // this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
+            let currentLocation = this.locationService.getLocation();
+            if(!currentLocation){
+                debugger;
+                //this.location = this.locationService.getLocation() || DEFAULT_LOCATION;
+                //TODO:: notify user
+            } else {
+                this.marker.setLatLng(this.location);
+                this.map.panTo(new L.LatLng(this.location.lat, this.location.lng));
+                // this.marker.setLatLng(newLocation);
+                // this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
+            }
         }
 
-        onSaveLocation(newLocation){
-            let {lat, lng} = newLocation;
-            this.locationService.setLocation({lat, lng});
+        onSaveLocation(){
+            this.locationService.setLocation(this.location);
             this.router.navigate(['/']);
         }
 

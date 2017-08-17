@@ -4,7 +4,7 @@
     (onLocationChange)="onLocationChange($event)"
     (onClearLocation)="openClearLocationModal($event)">
 
-    <button class="clear btn btn-outline-secondary" (click)="handleClearLocation($event)"
+    <button class="clear btn btn-outline-secondary" (click)="openClearLocationModal($event)"
     [disabled]="!location?.lat && !location?.lng">Clear</button>
 
     </location>
