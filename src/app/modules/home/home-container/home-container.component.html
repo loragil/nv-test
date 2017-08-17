@@ -2,7 +2,12 @@
     <location [latitude]="location.lat" [longitude]="location.lng"
     *ngIf="location; else noLocation"
     (onLocationChange)="onLocationChange($event)"
-    (onClearLocation)="openClearLocationModal($event)"></location>
+    (onClearLocation)="openClearLocationModal($event)">
+
+    <button class="clear btn btn-outline-secondary" (click)="handleClearLocation($event)"
+    [disabled]="!location?.lat && !location?.lng">Clear</button>
+
+    </location>
 </div>
 
 <ng-template #noLocation >

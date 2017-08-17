@@ -43,15 +43,23 @@ export class LocationContainerComponent implements OnInit {
                     navigator.geolocation.getCurrentPosition((position) => {
                         this.location = {lat:position.coords.latitude, lng:position.coords.longitude};
                         this.initMap(this.location);
+                    }, (err) => {
+                        //current location is not avialable. set default location
+                        this.setDefaultLocation();
                     });
                 } else {
                     //current location is not supported. set default location
-                    //FIXME: toaster notificaion
-                    //this.map.panTo(new L.LatLng(-1, -1));
-                    console.log('set default location');
-                    this.initMap({lat:DEFAULT_LOCATION.lat, lng:DEFAULT_LOCATION.lng});
+                    this.setDefaultLocation();
                 }
             }
+        }
+
+        private setDefaultLocation(){
+            //current location is not avialable or not supported. set default location
+            //FIXME: toaster notificaion
+            console.log('setting default location');
+            this.location = {lat:DEFAULT_LOCATION.lat, lng:DEFAULT_LOCATION.lng};
+            this.initMap(this.location);
         }
 
         private initMap({lat, lng}){
@@ -141,7 +149,7 @@ export class LocationContainerComponent implements OnInit {
         }
 
         onLoadLocation(){
-            this.location = this.locationService.getLocation();
+            this.location = this.locationService.getLocation() || DEFAULT_LOCATION;
             this.marker.setLatLng(this.location);
             this.map.panTo(new L.LatLng(this.location.lat, this.location.lng));
             // this.marker.setLatLng(newLocation);

@@ -5,5 +5,10 @@
     <location [latitude]="location?.lat" [longitude]="location?.lng"
     (onLocationChange)="onLocationChange($event)"
     (onLoadLocation)="onLoadLocation($event)"
-    (onSaveLocation)="onSaveLocation($event)"></location>
+    (onSaveLocation)="onSaveLocation($event)">
+
+        <button class="load btn btn-outline-secondary" (click)="handleLoadLocation()">Load</button>
+        <button class="save btn btn-outline-secondary" (click)="handleSaveLocation()">Save</button>
+
+    </location>
 </div>

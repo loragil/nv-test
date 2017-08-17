@@ -1,9 +1,9 @@
 <div class="location fluid-container fixed-bottom">
     <div class="container">
-        <div class="row">Your last location</div>
+        <h5 class="row">Your last location</h5>
         <div class="row align-items-center fields-wrapper">
             <label for="latitude" class="col-1 col-form-label">Latitude</label>
-            <div class="col-2">
+            <div class="col-3">
                 <input type="text" name="lat" min="-90" max="90"
                 class="form-control" name="latitude" id="latitude"
                 data-fv-between-message="The latitude must be between -90.0 and 90.0"
@@ -12,7 +12,7 @@
             </div>
 
             <label for="longitude" class="col-1 col-form-label">longitude</label>
-            <div class="col-2">
+            <div class="col-3">
                 <input type="text" min="-180" max="180"
                 class="form-control" name="longitude" id="longitude"
                 data-fv-between-message="The longitude must be between -180.0 and 180.0"
@@ -24,10 +24,12 @@
             <div class="col">
                 <div class="d-flex align-items-end flex-column row">
                     <div class="actions">
-                        <button class="clear btn btn-outline-secondary" (click)="handleClearLocation()"
+                        <!-- <button class="clear btn btn-outline-secondary" (click)="handleClearLocation()"
                         [disabled]="!lat && !lng">Clear</button>
                         <button class="load btn btn-outline-secondary" (click)="handleLoadLocation()">Load</button>
-                        <button class="save btn btn-outline-secondary" (click)="handleSaveLocation()">Save</button>
+                        <button class="save btn btn-outline-secondary" (click)="handleSaveLocation()">Save</button> -->
+                        <ng-content></ng-content>
+                        <!-- <ng-content select="actions"></ng-content> -->
                     </div>
                 </div>
             </div>
