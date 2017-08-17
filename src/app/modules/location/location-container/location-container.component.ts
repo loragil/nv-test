@@ -11,6 +11,12 @@ export const MARKER_ICON = L.icon({
     iconAnchor:   [12.5, 41]
 });
 
+export const DEFAULT_LOCATION:AppLocation = {
+    //nortecview HQ
+    lat:32.193188,
+    lng:34.884006
+};
+
 @Component({
     selector: 'app-location-container',
     templateUrl: './location-container.component.html',
@@ -28,19 +34,22 @@ export class LocationContainerComponent implements OnInit {
             this.location = this.locationService.getLocation();
 
             if(this.location){
+                //use previously saved location
                 this.initMap(this.location);
             } else {
-                //FIXME: ? handle violation 'Only request geolocation information in response to a user gesture.'
+                //FIXME: ? [devtools] handle violation 'Only request geolocation information in response to a user gesture.'
                 if (navigator.geolocation){
+                    //use browser's current location
                     navigator.geolocation.getCurrentPosition((position) => {
                         this.location = {lat:position.coords.latitude, lng:position.coords.longitude};
                         this.initMap(this.location);
                     });
-                } else{
+                } else {
+                    //current location is not supported. set default location
                     //FIXME: toaster notificaion
                     //this.map.panTo(new L.LatLng(-1, -1));
-                    console.log('bla');
-                    this.initMap({lat:-23.55052, lng:-46.633309});
+                    console.log('set default location');
+                    this.initMap({lat:DEFAULT_LOCATION.lat, lng:DEFAULT_LOCATION.lng});
                 }
             }
         }
@@ -131,9 +140,12 @@ export class LocationContainerComponent implements OnInit {
             this.location = newLocation;
         }
 
-        onLoadLocation(newLocation){
-            this.marker.setLatLng(newLocation);
-            this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
+        onLoadLocation(){
+            this.location = this.locationService.getLocation();
+            this.marker.setLatLng(this.location);
+            this.map.panTo(new L.LatLng(this.location.lat, this.location.lng));
+            // this.marker.setLatLng(newLocation);
+            // this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
         }
 
         onSaveLocation(newLocation){
