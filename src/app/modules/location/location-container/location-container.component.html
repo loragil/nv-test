@@ -2,7 +2,7 @@
     <div id="mapid"></div>
     <!-- <div id="mapid" *ngIf="!location.lat && !location.lng"></div> -->
 
-    <location [model]="location"
+    <location [latitude]="location?.lat" [longitude]="location?.lng"
     (onLocationChange)="onLocationChange($event)"
     (onLoadLocation)="onLoadLocation($event)"
     (onSaveLocation)="onSaveLocation($event)"

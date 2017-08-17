@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-//import {AppLocation} from '../../../../app.model';
+import {AppLocation} from '../../../../app.model';
 
 export const VALID_LAT_LON = "^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}";
 
@@ -16,10 +16,16 @@ export class LocationComponent implements OnInit {
     private lat:number;
     private lng:number;
 
-    //@Input() set model({lat = -23.55052, lng = -46.633309}){
-    @Input() set model({lat, lng}){
-        this.updateLatLon({lat, lng});
+    // @Input() set model({lat, lng}){
+    //     this.updateLatLon({lat, lng});
+    // }
+    @Input() set latitude(lat){
+        this.lat = lat;
     }
+    @Input() set longitude(lng){
+        this.lng = lng;
+    }
+
     @Output() onLocationChange = new EventEmitter();
     @Output() onLoadLocation = new EventEmitter();
     @Output() onSaveLocation = new EventEmitter();
@@ -29,10 +35,10 @@ export class LocationComponent implements OnInit {
 
     ngOnInit() {}
 
-    private updateLatLon({lat, lng}){
-        this.lat = lat;
-        this.lng = lng;
-    }
+    // private updateLatLon({lat, lng}){
+    //     this.lat = lat;
+    //     this.lng = lng;
+    // }
 
     //FIXME: handle logic dynamically (action & related callback are given as input to the component)
     handleLocationChange(e, field){

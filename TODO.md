@@ -22,7 +22,7 @@ AGENDA:
 
 TODO:
 =====
-* add styling
+V add styling
 * code cleanup
 * code review
 * documentation

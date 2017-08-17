@@ -1,5 +1,5 @@
 <div class="home-container d-flex align-content-center justify-content-center">
-    <location [model]="location"
+    <location [latitude]="location.lat" [longitude]="location.lng"
     *ngIf="location; else noLocation"
     (onLocationChange)="onLocationChange($event)"
     (onClearLocation)="openClearLocationModal($event)"></location>
