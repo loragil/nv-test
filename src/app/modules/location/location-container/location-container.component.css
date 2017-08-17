@@ -1,4 +1,4 @@
 #mapid {
     width: 100vw;
-    height: calc(100vh - 3.3rem);//FIXME: 3.3rem is height of navbar - set as scss variable OR adjust BS layout
+    height: calc(100vh - 3.5rem);//FIXME: 3.5rem is height of navbar - set as scss variable OR adjust BS layout
 }

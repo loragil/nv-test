@@ -1,4 +1,4 @@
 .app-main{
-    height: 100vh;
+    height: calc(100vh - 3.5rem);//FIXME: 3.5rem is height of navbar - set as scss variable OR adjust BS layout
 }
 /*# sourceMappingURL=app.component.css.map */
