@@ -1,19 +1,22 @@
 <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse bg-faded navbar-fixed-top">
-
+    <!-- BACK BUTTON -->
     <div *ngIf="!showMenu">
         <button (click)="goBack()" type="button" class="btn border-0" title="Back">
             <span class="fa fa-chevron-left align-middle"></span>
         </button>
     </div>
 
+    <!-- TOGGLE-MENU BUTTON -->
     <button class="navbar-toggler navbar-toggler-right" type="button"  *ngIf="showMenu"
         data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" (click)="isActive = !isActive">
         <i class="fa fa-bars" aria-hidden="true" *ngIf="!isActive"></i>
         <i class="fa fa-times" aria-hidden="true" *ngIf="isActive"></i>
     </button>
 
+    <!-- BRAND/LOGO/SLOGAN goes here -->
     <div class="navbar-brand" *ngIf="showMenu">{{title}}</div>
 
+    <!-- NAVIGATION LINKS -->
     <div class="collapse navbar-collapse" *ngIf="showMenu" [ngClass] = "{show : isActive}">
         <ul class="navbar-nav">
             <li class="nav-item" routerLinkActive="active">

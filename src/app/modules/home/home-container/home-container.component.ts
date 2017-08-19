@@ -11,7 +11,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
     styleUrls: ['./home-container.component.css']
 })
 export class HomeContainerComponent implements OnInit {
-    private location:AppLocation;
+    private location:AppLocation;//location tracker
     //private location:Promise<Location>;
 
     constructor(private locationService:LocationService,
@@ -22,21 +22,25 @@ export class HomeContainerComponent implements OnInit {
             this.initModels();
         }
 
+        //handle modal dialog
         openClearLocationModal() {
             const modalRef = this.modalService.open(ClearLocationModalComponent);
 
+            //setting dialog's data
             modalRef.componentInstance.title = 'Clear saved location';
             modalRef.componentInstance.msg = 'Are you sure you want to clear your location?';
 
+            //bind modal's close/dismiss eents
             modalRef.result.then((clearLocation:boolean) => {
-                //modal action executed
-                if(clearLocation){
+                //modal closed (modal action executed)
+                if(clearLocation){//clear location
                     //notify user
                     this.toasterService.pop({
                         type: 'success',
                         body: 'Location cleared'
                     });
 
+                    //update location
                     this.locationService.clearLocation();
                     this.location = null;
                 }
@@ -46,19 +50,9 @@ export class HomeContainerComponent implements OnInit {
         }
 
         onLocationChange(newLocation){
-            //this.marker.setLatLng(newLocation);
-            //this.map.panTo(new L.LatLng(newLocation.lat, newLocation.lng));
-
+            //update location
             this.location = newLocation;
         }
-        
-        // onClearLocation(){
-        //     this.toasterService.pop({
-        //         type: 'success',
-        //         body: 'Location cleared'
-        //     });
-        //     this.locationService.clearLocation();
-        // }
 
         private initModels(){
             this.getLocationModel();

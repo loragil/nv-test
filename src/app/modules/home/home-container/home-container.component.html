@@ -1,15 +1,17 @@
 <div class="home-container d-flex align-content-center justify-content-center">
-    <location [latitude]="location.lat" [longitude]="location.lng"
-    *ngIf="location; else noLocation"
-    (onLocationChange)="onLocationChange($event)"
-    (onClearLocation)="openClearLocationModal($event)">
+    <!-- LOCATION -->
+    <location *ngIf="location; else noLocation"
+        [latitude]="location.lat" [longitude]="location.lng"
+        (onLocationChange)="onLocationChange($event)"
+        (onClearLocation)="openClearLocationModal($event)">
 
-    <button class="clear btn btn-outline-secondary" (click)="openClearLocationModal($event)"
-    [disabled]="!location?.lat && !location?.lng">Clear</button>
-
+        <!-- CLEAR -->
+        <button class="clear btn btn-outline-secondary" (click)="openClearLocationModal($event)"
+            [disabled]="!location?.lat && !location?.lng">Clear</button>
     </location>
 </div>
 
+<!-- NO LOCATION SAVED YET -->
 <ng-template #noLocation >
     <div class="row align-self-center">
         your location is still unknown

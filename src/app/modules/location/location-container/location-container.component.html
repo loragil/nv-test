@@ -1,15 +1,17 @@
 <div class="location-container">
+    <!-- MAP -->
     <div id="mapid"></div>
-    <!-- <div id="mapid" *ngIf="!location.lat && !location.lng"></div> -->
 
+    <!-- LOCATION -->
     <location [latitude]="location?.lat" [longitude]="location?.lng"
-    (onLocationChange)="onLocationChange($event)"
-    (onLoadLocation)="onLoadLocation($event)"
-    (onSaveLocation)="onSaveLocation($event)">
+        (onLocationChange)="onLocationChange($event)"
+        (onLoadLocation)="onLoadLocation($event)"
+        (onSaveLocation)="onSaveLocation($event)">
 
-        <button class="load btn btn-outline-secondary" (click)="onLoadLocation($event)">Load</button>
-<!-- <button class="save btn btn-outline-secondary" (click)="this.handleSaveLocation()">Save</button> -->
-        <button class="save btn btn-outline-secondary" (click)="onSaveLocation($event)">Save</button>
+            <!-- LOAD -->
+            <button class="load btn btn-outline-secondary" (click)="onLoadLocation($event)">Load</button>
 
+            <!-- CLEAR -->
+            <button class="save btn btn-outline-secondary" (click)="onSaveLocation($event)">Save</button>
     </location>
 </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router, /*RouterModule, */ActivatedRoute, Event, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, Event, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
@@ -12,10 +12,10 @@ import 'rxjs/add/operator/filter';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-    private title;
-    private showMenu:boolean = true;
-    private subscription:Subscription;
+export class NavbarComponent implements OnInit, OnDestroy {
+    private title;//appears on brnad section
+    private showMenu:boolean = true;//holds menu's display state for current page
+    //private subscription:Subscription;
 
     constructor(private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
         private titleService:Title) { }
 
         ngOnInit() {
+            //subscribing to router's 'NavigationEnd' event, in order to update route-related data
             this.router.events
             .filter((event) => event instanceof NavigationEnd)
             .map(() => this.activatedRoute)
@@ -32,17 +33,20 @@ export class NavbarComponent implements OnInit {
             })
             .filter((route) => route.outlet === 'primary')
             .mergeMap((route) => route.data)
-            .subscribe((event) => {
-                let title = event['title'];
+            .subscribe((routeData) => {
+                let title = routeData['title'] || '';
 
+                //update title + page's title
                 this.titleService.setTitle(title);
                 this.title = title;
-                this.showMenu = event['showMenu'];
+
+                //update current page's menu-display state
+                this.showMenu = routeData['showMenu'];
             });
         }
 
         ngOnDestroy() {
-            this.subscription.unsubscribe();
+            //this.subscription.unsubscribe();
         }
 
         private goBack(){

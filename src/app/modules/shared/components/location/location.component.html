@@ -1,7 +1,10 @@
 <div class="location fluid-container fixed-bottom">
     <div class="container">
+        <!-- TITLE -->
         <h5 class="row">Your last location</h5>
         <div class="row align-items-center fields-wrapper">
+
+            <!-- LATITUDE -->
             <label for="latitude" class="col-1 col-form-label">Latitude</label>
             <div class="col-3">
                 <input type="text" name="lat" min="-90" max="90"
@@ -11,7 +14,8 @@
                 (change)="handleLocationChange($event, 'lat')">
             </div>
 
-            <label for="longitude" class="col-1 col-form-label">longitude</label>
+            <!-- LONGITUDE -->
+            <label for="longitude" class="col-1 col-form-label">Longitude</label>
             <div class="col-3">
                 <input type="text" min="-180" max="180"
                 class="form-control" name="longitude" id="longitude"
@@ -19,17 +23,13 @@
                 [(ngModel)]="lng" pattern="{{VALID_LAT_LON}}"
                 (change)="handleLocationChange($event, 'lng')">
             </div>
-            <!-- ^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6} -->
 
             <div class="col">
                 <div class="d-flex align-items-end flex-column row">
                     <div class="actions">
-                        <!-- <button class="clear btn btn-outline-secondary" (click)="handleClearLocation()"
-                        [disabled]="!lat && !lng">Clear</button>
-                        <button class="load btn btn-outline-secondary" (click)="handleLoadLocation()">Load</button>
-                        <button class="save btn btn-outline-secondary" (click)="handleSaveLocation()">Save</button> -->
+
+                        <!-- LOCATION ACTIONS (defined & handled by location's consumer) -->
                         <ng-content></ng-content>
-                        <!-- <ng-content select="actions"></ng-content> -->
                     </div>
                 </div>
             </div>

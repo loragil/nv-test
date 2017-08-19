@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-//import {NavbarComponent} from './modules/shared/components/navbar/navbar.component'
 
 @Component({
     selector: 'app-root',
@@ -9,6 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
     constructor(){}
-
-    title = 'app';
 }

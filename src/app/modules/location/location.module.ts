@@ -5,13 +5,11 @@ import { SharedModule } from '../shared/shared.module';
 import {LocationService} from '../shared/services/location.service';
 import {LocationContainerComponent} from './location-container/location-container.component';
 
-//import { ToasterService} from 'angular2-toaster';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//module for the location page
 @NgModule({
     imports: [
         CommonModule,
         SharedModule
-        //BrowserAnimationsModule
     ],
     providers:[LocationService],
     declarations: [LocationContainerComponent]

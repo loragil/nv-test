@@ -6,6 +6,7 @@ import { HomeContainerComponent } from './home-container/home-container.componen
 import {LocationService} from '../shared/services/location.service';
 import {ClearLocationModalComponent} from '../shared/components/modal/clear-location-modal/clear-location-modal.component';
 
+//module for the homepage
 @NgModule({
     imports: [
         CommonModule,

@@ -5,14 +5,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClearLocationModalComponent } from './components/modal/clear-location-modal/clear-location-modal.component';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
+//module for the shared components, services & utilities
 @NgModule({
     imports: [
         CommonModule,
         FormsModule ,
-        RouterModule,
-        ToastModule.forRoot()
+        RouterModule
     ],
     declarations: [LocationComponent, NavbarComponent, ClearLocationModalComponent],
     exports: [LocationComponent, NavbarComponent, ClearLocationModalComponent]

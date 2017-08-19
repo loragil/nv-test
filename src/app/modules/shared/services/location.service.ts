@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
+//used to access location in local storage
 export const LOCATION_STORAGE_KEY = 'location';
 
+//this service provides all operations against the chosen storage/db
 @Injectable()
 export class LocationService {
 
