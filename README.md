@@ -25,6 +25,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
     In terminal, under project's root folder, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+6. Bon Voyage!
+
 
 ## Notes:
 
