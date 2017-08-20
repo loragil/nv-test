@@ -23,7 +23,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 5. **Development server** -
 
-    In terminal, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    In terminal, under project's root folder, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 
 ## Notes:
@@ -39,10 +39,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Roadmap
 
 *  make a generic modal-shell component
-* input validation of lat, lng
+* input validation of lat/lng
 * create custom input component/pipe for lat/lng
 * if required, support localization
-* if app gets more complex/scales - use *observers* as models fro the dumb component
+* if app gets more complex/scales - use *observers* as async models (as the dumb components' input)
 
 ## Build
 
