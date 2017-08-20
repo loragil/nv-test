@@ -5,15 +5,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Installation
 
-1. **Install node JS** (+ npm, comes with node):
+1. **Install node JS (+ npm, comes with node)**:
+
     go to 'https://nodejs.org/en/', download node and follow installation instructions.
-2. Install angular CLI -
+
+2. **Install angular CLI** -
+
     In terminal, run `npm install -g @angular/cli`
-3. Get project -
+
+3. **Get project** -
+
     Download & extract project ZIP file from 'https://github.com/loragil/nv-test' to your local machine ('clone or download' button)
-4. Install app dependencies -
+
+4. **Install app dependencies** -
+
     In terminal, go to project's root folder and run `npm install` to install all app dependencies on your machine
-5. Development server -
+
+5. **Development server** -
+
     In terminal, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 
