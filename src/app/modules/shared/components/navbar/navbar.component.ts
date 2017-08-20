@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
             this.router.events
             .filter((event) => event instanceof NavigationEnd)
             .map(() => this.activatedRoute)
+            //handle (optional) sub-routes
             .map((route) => {
                 while (route.firstChild) route = route.firstChild;
                 return route;
@@ -43,7 +44,7 @@ export class NavbarComponent implements OnInit {
                 //update current page's menu-display state
                 this.showMenu = routeData['showMenu'];
             });
-        }        
+        }
 
         private goBack(){
             this.location.back();

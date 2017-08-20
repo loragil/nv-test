@@ -9,4 +9,5 @@ V refactor location service - utilize observables to subscribe from local storag
 disclaimers:
  * refresh (f5) route - always go to default: doesn't seem conventional. would implement using guard if really required
 * styling - took a bit of freedom..
+* used devtools assistance to test browser's current location
 * roadmap
