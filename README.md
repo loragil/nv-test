@@ -1,28 +1,44 @@
 # TestApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.0 and was written using Angular (4.2.4).
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+1. Install node JS (+ npm, comes with node):
+    go to 'https://nodejs.org/en/', download node and follow installation instructions.
+2. Install angular CLI -
+    In terminal, run `npm install -g @angular/cli`
+3. Get project -
+    Download & extract project ZIP file from 'https://github.com/loragil/nv-test' to your local machine ('clone or download' button)
+4. Install app dependencies -
+    In terminal, go to project's root folder and run `npm install` to install all app dependencies on your machine
+5. Development server -
+    In terminal, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Notes:
+
+* see 'Roadmap' section for stuff I'd consider adding in the future, given the time
+* styling - took a bit of freedom..
+* refresh (f5) route - always go to default: Not sure it's the conventional way..
+    (I believe we should use sub-routes instead). would implement using guard service for location route if required still
+* used devtools assistance to simulate location and test browser's current location
+* I've never dealt with location/map based code before.. FYI :)
+
+
+## Roadmap
+
+*  make a generic modal-shell component
+* input validation of lat, lng
+* create custom input component/pipe for lat/lng
+* if required, support localization
+* if app gets more complex/scales - use *observers* as models fro the dumb component
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
+## Angular CLI - Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

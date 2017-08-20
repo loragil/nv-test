@@ -54,6 +54,10 @@ export class LocationContainerComponent implements OnInit, OnDestroy {
             //invoke location's initial assignment
             this.locationService.getLocation();
 
+            this.getLocation();
+        }
+
+        private getLocation(){
             if(this.currentLocation){
                 //use previously saved location to initialize map
                 this.initMap(this.currentLocation);
