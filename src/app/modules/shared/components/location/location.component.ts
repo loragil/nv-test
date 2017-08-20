@@ -11,7 +11,6 @@ export const VALID_LAT_LON = "^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}";
     styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit {
-    //FIXME: move lat & lng to be memebers of locationService, and consume hat everywhere
     private lat:number;
     private lng:number;
 

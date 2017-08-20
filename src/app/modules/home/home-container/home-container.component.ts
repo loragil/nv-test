@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {LocationService} from '../../shared/services/location.service';
 import {AppLocation} from '../../../app.model';
 import {ClearLocationModalComponent} from '../../shared/components/modal/clear-location-modal/clear-location-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService, Toast } from 'angular2-toaster';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'home-container',
     templateUrl: './home-container.component.html',
     styleUrls: ['./home-container.component.css']
 })
-export class HomeContainerComponent implements OnInit {
-    private location:AppLocation;//location tracker
-    //private location:Promise<Location>;
+export class HomeContainerComponent implements OnInit, OnDestroy {
+    private location$:AppLocation;//location tracker
+    private locationSubscription$:Subscription;
 
     constructor(private locationService:LocationService,
         private modalService: NgbModal,
@@ -20,6 +21,11 @@ export class HomeContainerComponent implements OnInit {
 
         ngOnInit() {
             this.initModels();
+        }
+
+        ngOnDestroy() {
+            //removing subscription to prevent memory leaks
+            this.locationSubscription$.unsubscribe();
         }
 
         //handle modal dialog
@@ -42,26 +48,19 @@ export class HomeContainerComponent implements OnInit {
 
                     //update location
                     this.locationService.clearLocation();
-                    this.location = null;
                 }
             }, (reason) => {
                 //modal dismissed
             });
         }
 
-        onLocationChange(newLocation){
-            //update location
-            this.location = newLocation;
-        }
-
         private initModels(){
-            this.getLocationModel();
+            //subscribing to location changes
+            this.locationSubscription$ = this.locationService.location$.subscribe(latestLocation => {
+                //update location
+                this.location$ = latestLocation;
+            });
+            this.locationService.getLocation();
         }
 
-        private getLocationModel(){
-            // return this.locationService.getLocation()
-            // .then(location => this.location = location)
-            // .catch(error => console.log(error));
-            return this.location = this.locationService.getLocation();
-        }
     }

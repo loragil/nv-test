@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewContainerRef  } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
 import {LocationService} from '../../shared/services/location.service';
 import {AppLocation} from '../../../app.model';
 import { Router } from '@angular/router';
 import { ToasterService, Toast } from 'angular2-toaster';
+import {Subscription} from 'rxjs/Subscription';
 
 //setting map's marker icon
 export const MARKER_ICON = L.icon({
@@ -25,32 +26,55 @@ export const DEFAULT_LOCATION:AppLocation = {
     templateUrl: './location-container.component.html',
     styleUrls: ['./location-container.component.css']
 })
-export class LocationContainerComponent implements OnInit {
+export class LocationContainerComponent implements OnInit, OnDestroy {
     private map:L.Map;//map
     private marker:L.Marker;//marker
-    private location:AppLocation;//location tracker
+    private currentLocation:AppLocation;//location tracker
+    private locationSubscription$:Subscription;
 
     constructor(private locationService:LocationService,
         private router:Router,
         private toasterService: ToasterService) {}
 
         ngOnInit() {
-            //update location
-            this.location = this.locationService.getLocation();
+            this.initModels();
+        }
 
-            if(this.location){
+        ngOnDestroy() {
+            //removing subscription to prevent memory leaks
+            this.locationSubscription$.unsubscribe();
+        }
+
+        private initModels(){
+            //subscribing to location changes
+            this.locationSubscription$ = this.locationService.location$.subscribe(latestLocation => {
+                //update location
+                this.currentLocation = latestLocation;
+            });
+            //invoke location's initial assignment
+            this.locationService.getLocation();
+
+            if(this.currentLocation){
                 //use previously saved location to initialize map
-                this.initMap(this.location);
+                this.initMap(this.currentLocation);
             } else {
                 //FIXME?: [devtools] handle violation 'Only request geolocation information in response to a user gesture.'
                 if (navigator.geolocation){
+                    if(!this.currentLocation){
+                        //notify user if no saved location found
+                        this.toasterService.pop({
+                            type: 'error',
+                            body: 'No location have been saved yet'
+                        });
+                    }
+
                     //use browser's current location to initialize map
                     navigator.geolocation.getCurrentPosition((position) => {
-                        this.location = {lat:position.coords.latitude, lng:position.coords.longitude};
-                        this.initMap(this.location);
+                        this.currentLocation = {lat:position.coords.latitude, lng:position.coords.longitude};
+                        this.initMap(this.currentLocation);
                     }, (err) => {
                         //current location is not avialable. set default location
-                        this.setDefaultLocation();
+                        this.setDefaultLocation(false);
                     });
                 } else {
                     //current location is not supported. set default location
@@ -59,16 +83,17 @@ export class LocationContainerComponent implements OnInit {
             }
         }
 
-        private setDefaultLocation(){
-            //notify user
-            this.toasterService.pop({
-                type: 'error',
-                body: 'No location have been saved yet'
-            });
+        private setDefaultLocation(notifyUser:boolean = true){
+            if(notifyUser){
+                //notify user
+                this.toasterService.pop({
+                    type: 'error',
+                    body: 'No location have been saved yet'
+                });
+            }
 
-            //current location is not avialable or not supported. set default location to initialize map
-            this.location = {lat:DEFAULT_LOCATION.lat, lng:DEFAULT_LOCATION.lng};
-            this.initMap(this.location);
+            this.currentLocation = {lat:DEFAULT_LOCATION.lat, lng:DEFAULT_LOCATION.lng};
+            this.initMap(this.currentLocation);
         }
 
         private initMap({lat, lng}){
@@ -104,7 +129,7 @@ export class LocationContainerComponent implements OnInit {
         private onMapClick(e) {
             //update marker and location
             this.marker.setLatLng(e.latlng);
-            this.location = e.latlng;
+            this.currentLocation = e.latlng;
             //NOTE: not panning map to center around new location, because it's seems eye-disturbing (only doing that for mouse-drag)
         }
 
@@ -113,13 +138,13 @@ export class LocationContainerComponent implements OnInit {
             let {lat, lng} = this.marker.getLatLng();
 
             this.map.panTo(new L.LatLng(lat, lng));
-            this.location = {lat, lng};
+            this.currentLocation = {lat, lng};
         }
 
         private upadteLocation(location){
             this.marker.setLatLng(location);
             this.map.panTo(new L.LatLng(location.lat, location.lng));
-            this.location = location;
+            this.currentLocation = location;
         }
 
         onLocationChange(newLocation){
@@ -151,7 +176,7 @@ export class LocationContainerComponent implements OnInit {
             });
 
             //update location
-            this.locationService.setLocation(this.location);
+            this.locationService.setLocation(this.currentLocation);
 
             ///naigate back to homepage
             this.router.navigate(['/']);

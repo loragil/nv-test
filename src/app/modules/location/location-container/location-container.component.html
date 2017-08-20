@@ -3,7 +3,7 @@
     <div id="mapid"></div>
 
     <!-- LOCATION -->
-    <location [latitude]="location?.lat" [longitude]="location?.lng"
+    <location [latitude]="currentLocation?.lat" [longitude]="currentLocation?.lng"
         (onLocationChange)="onLocationChange($event)"
         (onLoadLocation)="onLoadLocation($event)"
         (onSaveLocation)="onSaveLocation($event)">

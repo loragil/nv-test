@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Event, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/filter';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
     private title;//appears on brnad section
     private showMenu:boolean = true;//holds menu's display state for current page
     //private subscription:Subscription;
@@ -43,11 +43,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
                 //update current page's menu-display state
                 this.showMenu = routeData['showMenu'];
             });
-        }
-
-        ngOnDestroy() {
-            //this.subscription.unsubscribe();
-        }
+        }        
 
         private goBack(){
             this.location.back();
