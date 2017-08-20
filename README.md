@@ -15,7 +15,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 3. **Get project** -
 
-    Download & extract project ZIP file from 'https://github.com/loragil/nv-test' to your local machine ('clone or download' button)
+    Download & extract project ZIP file to your local machine (see 'clone or download' button above)
 
 4. **Install app dependencies** -
 
@@ -28,7 +28,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Notes:
 
-* see 'Roadmap' section for stuff I'd consider adding in the future, given the time
+* see 'Roadmap' section below for stuff I'd consider adding in the future, given the time
 * styling - took a bit of freedom..
 * refresh (f5) route - always go to default: Not sure it's the conventional way..
     (I believe we should use sub-routes instead). would implement using guard service for location route if required still
